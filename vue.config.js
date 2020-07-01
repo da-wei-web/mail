@@ -7,5 +7,17 @@ module.exports = {
         path.resolve(__dirname, './src/css/base.less')
       ]
     }
+  },
+  configureWebpack: {
+    resolve: {
+      extensions: ['.less'],
+      alias: {
+        'assets': '@/assets',
+        'components': '@components',
+        'network': '@network',
+        'common': '@common',
+        'views': '@views'
+      }
+    }
   }
 }
