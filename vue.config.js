@@ -10,13 +10,13 @@ module.exports = {
   },
   configureWebpack: {
     resolve: {
-      extensions: ['.less'],
       alias: {
-        'assets': '@/assets',
-        'components': '@components',
-        'network': '@network',
-        'common': '@common',
-        'views': '@views'
+        '@': path.resolve(__dirname, 'src'),
+        // 'common': resolve('src/common'),
+        // 'assets': resolve('src/assets'),
+        'components': path.resolve(__dirname, 'src/components'),
+        // 'network': resolve('src/network'),
+        // 'views': resolve('src/views')
       }
     }
   }

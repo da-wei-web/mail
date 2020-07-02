@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1400868",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "1517504",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e652",
+      "unicode_decimal": 58962
+    },
+    {
+      "icon_id": "6604903",
+      "name": "公司名称",
+      "font_class": "gongsimingcheng",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "7159315",
+      "name": "加好",
+      "font_class": "jiahao",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "9371342",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e762",
+      "unicode_decimal": 59234
+    },
+    {
+      "icon_id": "14821790",
+      "name": "我的职位",
+      "font_class": "wodezhiwei",
+      "unicode": "ea14",
+      "unicode_decimal": 59924
+    }
+  ]
+}
