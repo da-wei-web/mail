@@ -1,7 +1,18 @@
 <template>
-  <show-list class="recommend">
-    <ul class="recommend-list">
-      <li v-for="(item, index) in recommends" :key="index" class="recommend-list-item">
+  <show-list class="feature">
+    <template v-slot:title>
+      <h2>本周流行</h2>
+    </template>
+    <ul class="feature-list">
+      <li v-for="(item, index) in features" :key="index" class="feature-list-item">
+        <a :href="item.link">
+          <img :src="item.image" alt="">
+          <p>{{ item.title }}</p>
+        </a>
+      </li>
+    </ul>
+     <ul class="feature-list">
+      <li v-for="(item, index) in features" :key="index" class="feature-list-item">
         <a :href="item.link">
           <img :src="item.image" alt="">
           <p>{{ item.title }}</p>
@@ -14,11 +25,11 @@
 <script>
   import ShowList from 'components/common/showlist/ShowList.vue';
   export default {
-    name: 'HomeRecommendView',
+    name: 'HomeFeature',
     props: {
-      recommends: {
+      features: {
         type: Array,
-        default() {
+        default(){
           return []
         }
       }
@@ -30,17 +41,22 @@
 </script>
 
 <style lang="less" scoped>
-  .recommend{
+  .feature{
     width: 100%;
-    padding: 10px 0 20px;
-    border-bottom: .08rem solid #eee;
+    padding: .1rem 0 .2rem;
+    text-align: center;
 
-    > .recommend-list{
+    > h2 {
+      font-size: .24rem;
+    }
+
+    > .feature-list{
       display: flex;
       width: 100%;
+      padding-top: .1rem;
       text-align: center;
 
-      > .recommend-list-item {
+      > .feature-list-item {
         flex: 1;
 
         > a {
@@ -58,10 +74,7 @@
             font-size: .12rem;
           }
         }
-        
       }
     }
   }
-</style>>
-
 </style>
