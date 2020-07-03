@@ -6,6 +6,12 @@ const Company = () => import('views/company/Company.vue')
 const My = () => import('views/my/My.vue')
 const News = () => import('views/news/News.vue')
 
+const originPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originPush.call(this, location).catch(err => err);
+}
+
+
 Vue.use(VueRouter)
 
 const routes = [

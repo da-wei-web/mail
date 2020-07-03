@@ -1,6 +1,6 @@
 <template>
   <tar-bar>
-    <tar-bar-item path="/work" activeColor="green">
+    <tar-bar-item path="/home" activeColor="green">
       <template v-slot:slot-icon>
         <span class="iconfont icon-wodezhiwei"></span>
       </template>
