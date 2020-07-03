@@ -15,10 +15,5 @@
     width: 100%;
     flex-shrink: 0;
     background-color: orange;
-
-    img {
-      width: 100%;
-    }
-
   }
 </style>
