@@ -5,17 +5,20 @@
         <h2>工作</h2>
       </template>
     </nav-bar>
+    <home-swiper :banners="banners"></home-swiper>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar.vue';
-import home from 'network/home';
+import HomeSwiper from './childComs/HomeSwiper.vue'
+import sHome from 'network/home';
 
 export default {
-  name: 'Work',
+  name: 'Home',
   components: {
-    NavBar
+    NavBar,
+    HomeSwiper
   },
   data(){
     return {
@@ -27,8 +30,8 @@ export default {
   },
   // 发送网络请求
   created() {
-    home.getHomeMultidata().then(res => {
-      console.log(res)
+    sHome.getHomeMultidata().then(res => {
+      // console.log(res)
       this.banners = res.data.banner.list;
       this.dKeywords = res.data.dKeyword.list;
       this.keywords = res.data.keywords.list;
@@ -40,10 +43,13 @@ export default {
 
 <style lang="less" scoped>
   @import "assets/css/base.less";
+  #home{
+    position: relative;
+		height: 100vh;
+  }
   .home-nav {
     background-color: @tint-color;
     color: @bgc;
   }
-</style>>
-
 </style>
+

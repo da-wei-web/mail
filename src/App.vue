@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import MainTarBar from "./components/conent/mainComponent/mainTarBar"
+  import MainTarBar from "components/conent/mainComponent/mainTarBar"
 
   let size = document.documentElement.clientWidth / 360;
   document.documentElement.style.fontSize = size * 100 + "px";

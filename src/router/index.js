@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Work = () => import('../views/work/Work.vue')
-const Company = () => import('../views/company/Company.vue')
-const My = () => import('../views/my/My.vue')
-const News = () => import('../views/news/News.vue')
+const Home = () => import('views/home/Home.vue')
+const Company = () => import('views/company/Company.vue')
+const My = () => import('views/my/My.vue')
+const News = () => import('views/news/News.vue')
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '',
-    redirect: '/work'
+    redirect: '/home'
   },
   {
-    path: '/work',
-    name: 'Work',
-    component: Work
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/company',
