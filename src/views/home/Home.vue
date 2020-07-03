@@ -51,9 +51,15 @@ export default {
   @import "assets/css/base.less";
   #home{
     position: relative;
-		height: 100vh;
+    height: 100vh;
+    padding-top: .44rem;
   }
   .home-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     background-color: @tint-color;
     color: @bgc;
   }
