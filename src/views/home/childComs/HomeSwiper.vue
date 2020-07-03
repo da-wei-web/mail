@@ -1,6 +1,6 @@
 <template>
   <swiper>
-		<slide v-for="(item, index) in banners" :key="index">
+		<slide v-for="(item, index) in banners" :key="index" class="slide">
 			<a :href="item.link">
 				<img :src="item.image" alt="">
 			</a>
@@ -33,6 +33,19 @@
   }
 </script>
 
-<style>
+<style lang="less" scoped>
+  .slide {
+    // 解决div的高度大于img高度的问题
+    font-size: 0;
 
+    > a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      
+      > img {
+        width: 100%;
+      }
+    }
+  }
 </style>
