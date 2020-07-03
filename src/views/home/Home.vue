@@ -6,19 +6,22 @@
       </template>
     </nav-bar>
     <home-swiper :banners="banners"></home-swiper>
+    <home-recommend-view :recommends="recommends"></home-recommend-view>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar.vue';
-import HomeSwiper from './childComs/HomeSwiper.vue'
+import HomeSwiper from './childComs/HomeSwiper.vue';
+import HomeRecommendView from './childComs/HomeRecommedView.vue';
 import sHome from 'network/home';
 
 export default {
   name: 'Home',
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    HomeRecommendView
   },
   data(){
     return {
