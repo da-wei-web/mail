@@ -40,7 +40,7 @@
     methods: {
       handleClick(){
         // 可以通过修改url实现路由跳转。
-        this.$router.push(this.path).catch(err => {console.log('错误', err);});
+        this.$router.push(this.path).catch(err => {console.log('错误', err)});
       }
     }
   }

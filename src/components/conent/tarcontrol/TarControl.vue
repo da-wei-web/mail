@@ -33,6 +33,7 @@
       // 点击切换选项卡状态
       handleClick(index) {
         this.currentIndex = index;
+        this.$emit('handleSwitch', index);
       }
     }
   }
@@ -41,6 +42,8 @@
 <style lang="less" scoped>
   @import 'assets/css/base.less';
   .tar-control {
+    position: sticky;
+    top: .4rem;
     width: 100%;
     height: .4rem;
     line-height: .4rem;
@@ -69,6 +72,4 @@
       }
     }
   }
-
-
 </style>
