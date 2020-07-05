@@ -7,9 +7,13 @@ export default {
       url: '/home/multidata'
     })
   },
-  getHomeMultidata2: () => {
+  getHomeGoods: (type, page) => {
     return request({
-      url: '/home/multidata'
+      url: '/home/data',
+      params: {
+        type,
+        page
+      }
     })
   }
 }

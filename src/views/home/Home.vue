@@ -8,7 +8,8 @@
     <home-swiper :banners="banners"></home-swiper>
     <home-recommend-view :recommends="recommends"></home-recommend-view>
     <home-feature :features="recommends"></home-feature>
-    <tar-control :tarList="['流行', '新款', '精选']"></tar-control>
+    <tar-control :tarList="['流行', '新款', '精选']" @handleSwitch="handleSwitch"></tar-control>
+    <goods-list :goods="goods[currentType].list" ></goods-list>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 // 公共组件
 import NavBar from 'components/common/navbar/NavBar.vue'; // 顶部导航组件
 import TarControl from 'components/conent/tarcontrol/TarControl.vue'; // 选项卡切换组件
+import GoodsList from 'components/conent/goodslist/GoodsLst';
 
 // 页面子组件
 import HomeSwiper from './childComs/HomeSwiper.vue'; // 轮播图组件
@@ -25,6 +27,7 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 // 路由方法
 import sHome from 'network/home';
 
+console.log(sHome)
 export default {
   name: 'Home',
   components: {
@@ -32,26 +35,70 @@ export default {
     HomeSwiper,
     HomeRecommendView,
     HomeFeature,
-    TarControl
+    TarControl,
+    GoodsList
   },
   data(){
     return {
       banners: [],
       dKeywords: [],
       keywords: [],
-      recommends: []
+      recommends: [],
+      goods: {
+        'pop': { page: 0, list: [] },
+        'new': { page: 0, list: [] },
+        'sell': { page: 0, list: [] },
+      },
+      currentType: 'pop'
     }
   },
   // 发送网络请求
   created() {
-    sHome.getHomeMultidata().then(res => {
-      // console.log(res)
-      this.banners = res.data.banner.list;
-      this.dKeywords = res.data.dKeyword.list;
-      this.keywords = res.data.keywords.list;
-      this.recommends = res.data.recommend.list;
-    });
-  }
+    // 获取轮播图以及推荐列表信息
+    this.getHomeMultidata();
+
+    // 商品列表信息
+    this.getHomeGoods('pop');
+    this.getHomeGoods('new');
+    this.getHomeGoods('sell');
+    
+  },
+  methods: {
+    // 事件处理
+    handleSwitch(index){
+      switch(index) {
+        case 0:
+          this.currentType = 'pop';
+          break;
+        case 1:
+          this.currentType = 'new';
+          break;
+        case 2:
+          this.currentType = 'sell';
+          break;
+      }
+    },
+    
+    // 网路请求数据处理
+    getHomeMultidata(){
+      sHome.getHomeMultidata().then(res => {
+        // console.log(res)
+        this.banners = res.data.banner.list;
+        this.dKeywords = res.data.dKeyword.list;
+        this.keywords = res.data.keywords.list;
+        this.recommends = res.data.recommend.list;
+      });
+    },
+    getHomeGoods(type){
+      const page = this.goods[type].page + 1;
+      sHome.getHomeGoods(type, page).then(res => {
+        console.log(res); // data
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
+      });
+    }
+  } 
+
 }
 </script>
 
