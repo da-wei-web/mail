@@ -8,7 +8,9 @@
     <scroll class="wrapper-container" 
             ref="scroll"
             :probe-type="3"
-            @scroll="scrollPosition">
+            @scroll="scrollPosition"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
       <home-swiper :banners="banners"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <home-feature :features="recommends"></home-feature>
@@ -18,7 +20,7 @@
                 </tar-control>
       <goods-list :goods="goods[currentType].list" ></goods-list>
     </scroll>
-    <back-top @click.native="backToTop"></back-top>
+    <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
   </div>
 </template>
 
@@ -62,7 +64,8 @@ export default {
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] },
       },
-      currentType: 'pop'
+      currentType: 'pop',
+      isShowBT: false
     }
   },
   // 发送网络请求
@@ -93,19 +96,28 @@ export default {
           this.currentType = 'sell';
           break;
       }
-    },
+    }, 
     // 返回顶部
     backToTop() {
+      console.log(this.$refs.scroll)
       this.$refs.scroll.scrollTo(0, 0, 500)
     },
     // 实时检测滚动位置
     scrollPosition(position) {
-      console.log( position )
+      // console.log( position )
+      this.isShowBT = Math.abs(position.y) > 1000
     },
 
+    // 加载更多内容
+    loadMore() {
+      this.getHomeGoods(this.currentType);
+      // 解决异步加载图片时,高度计算失误问题
+      this.$refs.scroll.refresh();
+    },
+    
     /*
       网路请求数据处理
-    */
+     */
     getHomeMultidata(){
       sHome.getHomeMultidata().then(res => {
         // console.log(res)
@@ -121,10 +133,12 @@ export default {
         console.log(res); // data
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-      });
-    }
-  } 
 
+        // 下拉加载更多完成时执行
+        this.$refs.scroll.finishPullUp();
+      });
+    },
+  } 
 }
 </script>
 

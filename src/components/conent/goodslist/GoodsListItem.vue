@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item">
-    <a :href="goodsItem.link" class="goods-list-link">
+    <a href="#" class="goods-list-link">
       <img :src="showImage" 
           alt="" 
           :width="showWH.w" 
