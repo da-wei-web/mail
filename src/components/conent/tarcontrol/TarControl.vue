@@ -42,11 +42,10 @@
 <style lang="less" scoped>
   @import 'assets/css/base.less';
   .tar-control {
-    position: sticky;
-    top: .4rem;
     width: 100%;
-    height: .4rem;
-    line-height: .4rem;
+    height: .44rem;
+    line-height: .44rem;
+    background-color: #fff;
 
     > .tar-control-list {
       display: flex;

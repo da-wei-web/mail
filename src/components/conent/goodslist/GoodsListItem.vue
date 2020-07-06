@@ -67,8 +67,6 @@
       > .goods-list-text {
         font-size: .14rem;
 
-      
-
         > p {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -81,7 +79,7 @@
           justify-content: space-between;
           align-items: center;
           
-          .goods-price-container{
+          > .goods-price-container{
             height: .2rem;
             line-height: .2rem;
 

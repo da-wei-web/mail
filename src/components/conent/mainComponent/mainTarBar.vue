@@ -1,13 +1,15 @@
 <template>
   <tar-bar>
-    <tar-bar-item path="/home" activeColor="green">
-      <template v-slot:slot-icon>
-        <span class="iconfont icon-wodezhiwei"></span>
-      </template>
-      <template v-slot:slot-text>
-        <span class="text">职位</span>
-      </template>
-    </tar-bar-item>
+    <keep-alive>
+      <tar-bar-item path="/home" activeColor="green">
+        <template v-slot:slot-icon>
+          <span class="iconfont icon-wodezhiwei"></span>
+        </template>
+        <template v-slot:slot-text>
+          <span class="text">主页</span>
+        </template>
+      </tar-bar-item>
+    </keep-alive>
     <tar-bar-item path="/company">
       <template v-slot:slot-icon>
         <span class="iconfont icon-gongsimingcheng"></span>
