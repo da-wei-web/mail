@@ -3,7 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+// 注册事件总线
+Vue.prototype.$bus = new Vue();
 
 new Vue({
   router,

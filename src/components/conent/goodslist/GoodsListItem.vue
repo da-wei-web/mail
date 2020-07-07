@@ -5,7 +5,8 @@
           alt="" 
           :width="showWH.w" 
           :height="showWH.h"
-          class="goods-list-img">
+          class="goods-list-img"
+          @load="itemImgLoad">
       <div class="goods-list-text">
         <p>{{ goodsItem.title }}</p>
         
@@ -43,6 +44,11 @@
           h: this.goodsItem.show.h,
           w: this.goodsItem.show.w
         }
+      }
+    },
+    methods: {
+      itemImgLoad() {
+        this.$bus.$emit('itemImgLoad');
       }
     }
   }
