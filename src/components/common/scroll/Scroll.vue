@@ -50,15 +50,17 @@
     methods: {
       // 一键置顶
       scrollTo(x, y, time=300) {
-				this.scroll.scrollTo(x, y, time)
+        // && 从左向右依次检验, 条件为真继续执行, 条件为假不再执行其右侧的代码
+				this.scroll && this.scroll.scrollTo(x, y, time);
       },
       // 加载更多结束
       finishPullUp() {
-        this.scroll.finishPullUp();
+        this.scroll && this.scroll.finishPullUp();
       },
       // 刷新
       refresh() {
-        this.scroll.refresh();
+        // console.log('111111')
+        this.scroll && this.scroll.refresh();
       }
     }
   }

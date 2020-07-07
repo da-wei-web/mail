@@ -39,6 +39,7 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 
 // 路由方法
 import sHome from 'network/home';
+import { debance } from 'common/untils/untils';
 
 console.log(sHome)
 export default {
@@ -76,14 +77,15 @@ export default {
     // 商品列表信息
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
-    this.getHomeGoods('sell');
-
-    // 监听图片是否加载完成
+    this.getHomeGoods('sell');    
+  },
+  mounted() {
+    // 防抖减少刷新频率
+    const refresh = debance(this.$refs.scroll.refresh, 300);
+    // 监听图片是否加载完成 
     this.$bus.$on('itemImgLoad', () => {
-      console.log('111');
-      this.$refs.scroll.refresh();
-    })
-    
+      refresh();
+    });
   },
   methods: {
     /*
@@ -120,7 +122,7 @@ export default {
       // 解决异步加载图片时,高度计算失误问题
       this.$refs.scroll.refresh();
     },
-    
+
     /*
       网路请求数据处理
      */
