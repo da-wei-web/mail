@@ -1,11 +1,11 @@
 <template>
   <tar-bar>
-    <tar-bar-item path="/work" activeColor="green">
+    <tar-bar-item path="/home" activeColor="green">
       <template v-slot:slot-icon>
         <span class="iconfont icon-wodezhiwei"></span>
       </template>
       <template v-slot:slot-text>
-        <span class="text">职位</span>
+        <span class="text">主页</span>
       </template>
     </tar-bar-item>
     <tar-bar-item path="/company">

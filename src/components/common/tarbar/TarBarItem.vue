@@ -1,10 +1,10 @@
 <template>
-  <li class="tar-bar-item" @click="handleClick">
-    <a href="#">
-      <div :style="activeStyle">
+  <li class="tar-bar-item"  @click="handleClick">
+    <a href="#" :style="activeStyle">
+      <div>
         <slot name="slot-icon"></slot>
       </div>
-      <div :style="activeStyle">
+      <div>
         <slot name="slot-text"></slot>
       </div>
     </a>
@@ -40,9 +40,7 @@
     methods: {
       handleClick(){
         // 可以通过修改url实现路由跳转。
-        this.$router.push(this.path).catch(err => {
-          console.log('错误', err);
-        });
+        this.$router.push(this.path).catch(err => {console.log('错误', err)});
       }
     }
   }

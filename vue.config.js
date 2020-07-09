@@ -12,11 +12,11 @@ module.exports = {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        // 'common': resolve('src/common'),
-        // 'assets': resolve('src/assets'),
+        'common': path.resolve(__dirname, 'src/common'),
+        'assets': path.resolve(__dirname, 'src/assets'),
         'components': path.resolve(__dirname, 'src/components'),
-        // 'network': resolve('src/network'),
-        // 'views': resolve('src/views')
+        'network': path.resolve(__dirname, 'src/network'),
+        'views': path.resolve(__dirname, 'src/views')
       }
     }
   }
