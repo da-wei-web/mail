@@ -34,9 +34,23 @@
         }
       }
     },
+    data() {
+      return {
+        isLoad: false
+      }
+    },
     components: {
       ShowList
-    }
+    },
+    // methods: {
+    //   imageLoad() {
+    //     if(!this.isLoad) {
+    //       console.log('**********')
+    //       this.$emit('swiperImageLoad2');
+    //       this.isLoad = true;
+    //     }
+    //   }
+    // }
   }
 </script>
 

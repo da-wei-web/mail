@@ -61,6 +61,10 @@
       refresh() {
         // console.log('111111')
         this.scroll && this.scroll.refresh();
+      },
+      // 记录滚动停留的位置
+      getScrollY() {
+        return this.scroll ? this.scroll.y : 0;
       }
     }
   }

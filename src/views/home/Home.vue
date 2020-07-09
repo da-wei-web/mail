@@ -5,19 +5,23 @@
         <h2>主页</h2>
       </template>
     </nav-bar>
+    <tar-control :tarList="['流行', '新款', '精选']" 
+              @handleSwitch="handleSwitch"
+              ref="tarControl1"
+              class="tar-control-top" 
+              v-show="isFixed" />
     <scroll class="wrapper-container" 
             ref="scroll"
             :probe-type="3"
             @scroll="scrollPosition"
             :pull-up-load="true"
             @pullingUp="loadMore">
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
       <home-recommend-view :recommends="recommends"></home-recommend-view>
       <home-feature :features="recommends"></home-feature>
       <tar-control :tarList="['流行', '新款', '精选']" 
-                @handleSwitch="handleSwitch"
-                class="tar-control-top">
-                </tar-control>
+                    @handleSwitch="handleSwitch"
+                    ref="tarControl2" />
       <goods-list :goods="goods[currentType].list" ></goods-list>
     </scroll>
     <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
@@ -66,7 +70,10 @@ export default {
         'sell': { page: 0, list: [] },
       },
       currentType: 'pop',
-      isShowBT: false
+      isShowBT: false,
+      fixedPosition: 0,
+      isFixed: false,
+      saveY: 0
     }
   },
   // 发送网络请求
@@ -87,6 +94,17 @@ export default {
       refresh();
     });
   },
+  // 进入时
+  activated() {
+    // console.log('activated')
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.refresh();
+  },
+  // 退出时
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScrollY();
+    // console.log('deactivated')
+  },
   methods: {
     /*
       事件处理
@@ -104,16 +122,31 @@ export default {
           this.currentType = 'sell';
           break;
       }
+
+      // 保持两个tarbar选项的标识是一致的 
+      this.$refs.tarControl1.currentIndex = index;
+      this.$refs.tarControl2.currentIndex = index;
+      // this.$refs.scroll.refresh();
     }, 
     // 返回顶部
     backToTop() {
-      console.log(this.$refs.scroll)
+      // console.log(this.$refs.scroll)
       this.$refs.scroll.scrollTo(0, 0, 500)
     },
     // 实时检测滚动位置
     scrollPosition(position) {
-      // console.log( position )
-      this.isShowBT = Math.abs(position.y) > 1000
+      // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
+      this.isShowBT = Math.abs( position.y ) > 1000;
+
+      // 吸停效果
+      this.isFixed = Math.abs( position.y ) > this.fixedPosition; 
+      // console.log(this.isFixed)
+    },
+
+    // 获取标识为tarControl2的DOM元素到顶部的高度offsetTop, 用于确定tarbar吸停的位置
+    swiperImageLoad() {
+      this.fixedPosition = this.$refs.tarControl2.$el.offsetTop;
+      // console.log(this.fixedPosition) // 578
     },
 
     // 加载更多内容
@@ -138,7 +171,7 @@ export default {
     getHomeGoods(type){
       const page = this.goods[type].page + 1;
       sHome.getHomeGoods(type, page).then(res => {
-        console.log(res); // data
+        // console.log(res); // data
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
 
@@ -155,22 +188,14 @@ export default {
   #home{
     position: relative;
     height: 100vh;
-    padding-top: .44rem;
   }
   .home-nav {
-    // 固定顶部导航位置
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: @tint-color;
     color: @bgc;
+    background-color: @tint-color;
   }
 
   .tar-control-top{
-    position: sticky;
-    top: .44rem;
+    position: relative;
     z-index: 10;
   }
 
@@ -184,7 +209,8 @@ export default {
 		left: 0;
 		right: 0;
 		top: .44rem;
-		bottom: .49rem;
+    bottom: .49rem;
+    background-color: #fff;
   }
 </style>
 

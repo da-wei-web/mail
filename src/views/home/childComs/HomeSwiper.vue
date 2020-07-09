@@ -2,7 +2,7 @@
   <swiper>
 		<slide v-for="(item, index) in banners" :key="index" class="slide">
 			<a :href="item.link">
-				<img :src="item.image" alt="">
+				<img :src="item.image" alt="" @load="imageLoad">
 			</a>
 		</slide>
 	</swiper>
@@ -21,6 +21,11 @@
         } 
       }
     },
+    data() {
+      return {
+        isLoad: false
+      }
+    },
     components: {
       Swiper,
       Slide
@@ -28,6 +33,16 @@
     methods:{
       getData(){
         console.log(banners);
+      },
+
+      imageLoad() {
+        // isload为false时, 发射自定义数据
+        if(!this.isLoad){
+          // console.log("-------")
+          this.$emit('swiperImageLoad');
+          this.isLoad = true;
+        }
+        // isload变为true, 保证数据仅被发送一次
       }
     }
   }
