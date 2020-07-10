@@ -5,6 +5,7 @@ const Home = () => import('views/home/Home.vue');
 const Company = () => import('views/company/Company.vue');
 const My = () => import('views/my/My.vue');
 const News = () => import('views/news/News.vue');
+const Detail = () => import('views/details/Detail.vue');
 
 // 解决重复点击路由报错问题
 const originPush = VueRouter.prototype.push;
@@ -41,6 +42,11 @@ const routes = [
     path: '/my',
     name: 'My',
     component: My
+  },
+  {
+    path: '/detail/:iid',
+    name: 'Detail',
+    component: Detail
   }
 ]
 

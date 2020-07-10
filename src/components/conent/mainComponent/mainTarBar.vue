@@ -2,7 +2,7 @@
   <tar-bar>
     <tar-bar-item path="/home" activeColor="green">
       <template v-slot:slot-icon>
-        <span class="iconfont icon-wodezhiwei"></span>
+        <span class="iconfont icon-zhuye"></span>
       </template>
       <template v-slot:slot-text>
         <span class="text">主页</span>
@@ -10,7 +10,7 @@
     </tar-bar-item>
     <tar-bar-item path="/company">
       <template v-slot:slot-icon>
-        <span class="iconfont icon-gongsimingcheng"></span>
+        <span class="iconfont icon-gongsi"></span>
       </template>
       <template v-slot:slot-text>
         <span class="text">公司</span>
@@ -26,7 +26,7 @@
     </tar-bar-item>
     <tar-bar-item path="/my">
       <template  v-slot:slot-icon>
-        <span class="iconfont icon-wode"></span>
+        <span class="iconfont icon-Icon_wode"></span>
       </template>
       <template  v-slot:slot-text>
         <span class="text">我的</span>

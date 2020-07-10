@@ -45,7 +45,6 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 import sHome from 'network/home';
 import { debance } from 'common/untils/untils';
 
-console.log(sHome)
 export default {
   name: 'Home',
   components: {

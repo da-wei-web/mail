@@ -6,7 +6,8 @@
           :width="showWH.w" 
           :height="showWH.h"
           class="goods-list-img"
-          @load="itemImgLoad">
+          @load="itemImgLoad"
+          @click="jumpDetail">
       <div class="goods-list-text">
         <p>{{ goodsItem.title }}</p>
         
@@ -31,7 +32,8 @@
       goodsItem: {
         type: Object,
         default(){
-          return {}
+          return {
+          }
         }
       }
     },
@@ -49,6 +51,9 @@
     methods: {
       itemImgLoad() {
         this.$bus.$emit('itemImgLoad');
+      },
+      jumpDetail() {
+        this.$router.push('/detail/' + this.goodsItem.iid);
       }
     }
   }
