@@ -12,8 +12,10 @@
 
 <style lang="less" scoped>
   .slide {
-    width: 100%;
     flex-shrink: 0;
+    width: 100%;
+    // 解决div的高度大于img高度的问题
+    font-size: 0;
     background-color: orange;
   }
 </style>

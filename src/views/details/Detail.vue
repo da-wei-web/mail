@@ -3,24 +3,28 @@
     <!-- <h2>{{ iid }}</h2> -->
     <!-- 头部导航 -->
     <detail-nav-bar />
+    <detail-top-swiper :top-images="topImages" />
   </div>
 </template>
 
 <script>
-  import DetailNavBar from './detailnavbar/DetailNavBar';
-
+  import DetailNavBar from './childComs/DetailNavBar';
+  import DetailTopSwiper from './childComs/DetailTopSwiper';
   // 网络请求
   import sHome from 'network/home';
   export default {
-    name: 'Detail',
+    name: 'DetailDetail',
     data() {
       return {
         // 要和后端要求的字段名一致
-        iid: null
+        iid: null,
+        // 顶部图片数据
+        topImages: []
       }
     },
     components: {
-      DetailNavBar
+      DetailNavBar,
+      DetailTopSwiper
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -28,7 +32,7 @@
       // console.log(this.iid)
       // 调用toGoodsDetail方法发送网络请求
       this.toGoodsDetail(this.iid);
-      
+      this.$
     },
     methods: {
       /*
@@ -36,7 +40,11 @@
        */
       toGoodsDetail(id) {
         sHome.toGoodsDetail(id).then(res => {
-          console.log(res)
+          // console.log(res)
+          // 获取顶部图片数据
+          this.topImages = res.result.itemInfo.topImages;
+          // this.topImages.push(...res.result.itemInfo.topImages);
+          // console.log(this.topImages)
         })
       }
     }

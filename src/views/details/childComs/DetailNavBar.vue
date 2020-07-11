@@ -5,7 +5,7 @@
     </template>
     <template v-slot:center>
       <ul class="detail-nav-bar">
-        <li v-for="(item, index) in ['hah', 'b2b', 'c33', 'sss']"
+        <li v-for="(item, index) in ['商品', '参数', '评论', '推荐']"
             :key="index"
             :class="{active: currentIndex === index}"
             @click="handleClick(index)">
@@ -36,7 +36,9 @@
 
       // 返回
       backTo() {
-        this.$router.push('/home');
+        // this.$router.push('/home');
+        this.$router.back(-1);
+        console.log('1')
       }
 
     }
