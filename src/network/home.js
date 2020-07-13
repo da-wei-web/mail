@@ -15,15 +15,5 @@ export default {
         page
       }
     })
-  },
-  toGoodsDetail: iid => {
-    return request({
-      url: '/detail', 
-      params: {
-        // 和后端数据接口的id字段名保持一致
-        iid
-      } 
-    })
   }
-
 }
