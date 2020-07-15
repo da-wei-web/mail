@@ -5,6 +5,7 @@
     <detail-nav-bar />
     <detail-top-swiper :top-images="topImages" />
     <detail-goods-msg :goods-msg="goods" />
+    <detail-shop-msg :shop-msg="shop"/>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
   import DetailNavBar from './childComs/DetailNavBar';
   import DetailTopSwiper from './childComs/DetailTopSwiper';
   import DetailGoodsMsg from './childComs/DetailGoodsMsg';
+  import DetailShopMsg from './childComs/DetailShopMsg';
   // 网络请求
   import sDetail from 'network/details';
   export default {
@@ -23,13 +25,16 @@
         // 顶部图片数据
         topImages: [],
         // 商品数据
-        goods: {}
+        goods: {},
+        // 商铺数据
+        shop: {}
       }
     },
     components: {
       DetailNavBar,
       DetailTopSwiper,
-      DetailGoodsMsg
+      DetailGoodsMsg,
+      DetailShopMsg
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -51,13 +56,22 @@
           // this.topImages.push(...res.result.itemInfo.topImages);
           // console.log(this.topImages)
           
-          this.goods = new sDetail.GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services);
+          let goodsMsg = new sDetail.GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services);
           // Object.assign(this.goods, new sDetail.GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services));
+          // console.log(goodsMsg);
+          goodsMsg.newServices = goodsMsg.services.filter(item => {
+            if(item.icon) {
+              return item;
+            }
+          });
+          this.goods = goodsMsg;
           console.log(this.goods)
+
+          this.shop = new sDetail.ShopInfo(data.shopInfo);
+          console.log(this.shop)
+          // 5ea732  f13e3a
         })
-      },
-
-
+      }
     }
   }
 </script>

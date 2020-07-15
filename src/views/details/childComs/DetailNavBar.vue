@@ -38,6 +38,7 @@
       backTo() {
         // this.$router.push('/home');
         this.$router.back(-1);
+        console.log(this.$router)
         console.log('1')
       }
 
