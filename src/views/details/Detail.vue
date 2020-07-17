@@ -3,19 +3,27 @@
     <!-- <h2>{{ iid }}</h2> -->
     <!-- 头部导航 -->
     <detail-nav-bar />
-    <detail-top-swiper :top-images="topImages" />
-    <detail-goods-msg :goods-msg="goods" />
-    <detail-shop-msg :shop-msg="shop"/>
+    <!-- 主体滚动区域 -->
+    <scroll class="wrapper-container" ref="scroll">
+      <detail-top-swiper :top-images="topImages" />
+      <detail-goods-msg :goods-msg="goods" />
+      <detail-shop-msg :shop-msg="shop"/>
+    </scroll>
   </div>
 </template>
 
 <script>
+  import Scroll from 'components/common/scroll/Scroll';
+
+  // 页面子组件
   import DetailNavBar from './childComs/DetailNavBar';
   import DetailTopSwiper from './childComs/DetailTopSwiper';
   import DetailGoodsMsg from './childComs/DetailGoodsMsg';
   import DetailShopMsg from './childComs/DetailShopMsg';
+
   // 网络请求
   import sDetail from 'network/details';
+
   export default {
     name: 'Detail',
     data() {
@@ -32,6 +40,7 @@
     },
     components: {
       DetailNavBar,
+      Scroll,
       DetailTopSwiper,
       DetailGoodsMsg,
       DetailShopMsg
@@ -56,6 +65,7 @@
           // this.topImages.push(...res.result.itemInfo.topImages);
           // console.log(this.topImages)
           
+          // 获取商品数据
           let goodsMsg = new sDetail.GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services);
           // Object.assign(this.goods, new sDetail.GoodsInfo(data.itemInfo, data.columns, data.shopInfo.services));
           // console.log(goodsMsg);
@@ -67,9 +77,11 @@
           this.goods = goodsMsg;
           console.log(this.goods)
 
+          // 获取店铺的数据
           this.shop = new sDetail.ShopInfo(data.shopInfo);
           console.log(this.shop)
-          // 5ea732  f13e3a
+        }).catch(err => {
+          console.log(err);
         })
       }
     }
@@ -77,5 +89,24 @@
 </script>
 
 <style lang="less" scoped>
+  // 在详情页遮盖tarbar
+  #detail {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    background-color: #fff;
 
+    > .wrapper-container {
+      // calc() CSS3中动态计算元素宽度和高度
+      // height: calc(100% - .44rem);
+
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: .44rem;
+      bottom: .49rem;
+      background-color: #fff;
+    }
+  }
 </style>

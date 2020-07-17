@@ -19,7 +19,7 @@
     width: 100%;
     height: .48rem;
     background-color:orange;
-    z-index: 100;
+    z-index: 9;
   }
 
   #tar-bar-items{

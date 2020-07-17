@@ -10,7 +10,10 @@ export default {
       } 
     })
   },
-  // 数据整合
+  /**
+   * 数据整合 
+   */ 
+  // 商品数据整合
   GoodsInfo: class {
     constructor(itemInfo, columns,services) {
       this.title = itemInfo.title;
@@ -22,6 +25,19 @@ export default {
       this.columns = columns;
       this.services = services;
     }
+  },
+  // 商铺数据整合
+  ShopInfo: class {
+    constructor(shopInfo) {
+      this.name = shopInfo.name;
+      this.shopLogo = shopInfo.shopLogo;
+      this.shopUrl = shopInfo.shopUrl;
+      this.score = shopInfo.score;
+      this.cFans = shopInfo.cFans;
+      this.cSells = shopInfo.cSells;
+      this.cGoods = shopInfo.cGoods;
+    }
   }
+
 }
 
