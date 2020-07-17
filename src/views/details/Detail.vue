@@ -8,6 +8,7 @@
       <detail-top-swiper :top-images="topImages" />
       <detail-goods-msg :goods-msg="goods" />
       <detail-shop-msg :shop-msg="shop"/>
+      <detail-info :goods-info="detailInfo" @imgLoad="imgLoad" />
     </scroll>
   </div>
 </template>
@@ -20,6 +21,7 @@
   import DetailTopSwiper from './childComs/DetailTopSwiper';
   import DetailGoodsMsg from './childComs/DetailGoodsMsg';
   import DetailShopMsg from './childComs/DetailShopMsg';
+  import DetailInfo from './childComs/DetailInfo';
 
   // 网络请求
   import sDetail from 'network/details';
@@ -35,7 +37,9 @@
         // 商品数据
         goods: {},
         // 商铺数据
-        shop: {}
+        shop: {},
+        // 商品详细信息
+        detailInfo: {}
       }
     },
     components: {
@@ -43,7 +47,8 @@
       Scroll,
       DetailTopSwiper,
       DetailGoodsMsg,
-      DetailShopMsg
+      DetailShopMsg,
+      DetailInfo
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -80,9 +85,22 @@
           // 获取店铺的数据
           this.shop = new sDetail.ShopInfo(data.shopInfo);
           console.log(this.shop)
+
+          // 获取商品具体信息
+          this.detailInfo = data.detailInfo;
+          console.log(this.detailInfo);
+
         }).catch(err => {
           console.log(err);
         })
+      },
+
+      /*
+       * 事件处理
+       */ 
+
+      imgLoad() {
+        this.$refs.scroll.refresh();
       }
     }
   }
