@@ -9,11 +9,13 @@
       <detail-goods-msg :goods-msg="goods" />
       <detail-shop-msg :shop-msg="shop"/>
       <detail-info :goods-info="detailInfo" @imgLoad="imgLoad" />
+      <detail-goods-params :goodsParams="goodsParams" />
     </scroll>
   </div>
 </template>
 
 <script>
+  // 公共组件
   import Scroll from 'components/common/scroll/Scroll';
 
   // 页面子组件
@@ -22,6 +24,8 @@
   import DetailGoodsMsg from './childComs/DetailGoodsMsg';
   import DetailShopMsg from './childComs/DetailShopMsg';
   import DetailInfo from './childComs/DetailInfo';
+  import DetailGoodsParams from './childComs/DetailGoodsParams';
+
 
   // 网络请求
   import sDetail from 'network/details';
@@ -38,8 +42,10 @@
         goods: {},
         // 商铺数据
         shop: {},
-        // 商品详细信息
-        detailInfo: {}
+        // 商品详细信息数据
+        detailInfo: {},
+        // 商品参数数据
+        goodsParams: {}
       }
     },
     components: {
@@ -48,7 +54,8 @@
       DetailTopSwiper,
       DetailGoodsMsg,
       DetailShopMsg,
-      DetailInfo
+      DetailInfo,
+      DetailGoodsParams
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -90,6 +97,9 @@
           this.detailInfo = data.detailInfo;
           console.log(this.detailInfo);
 
+          // 获取商品参数
+          this.goodsParams = new sDetail.GoodsParams(data.itemParams.info, data.itemParams.rule);
+          console.log(this.goodsParams);
         }).catch(err => {
           console.log(err);
         })

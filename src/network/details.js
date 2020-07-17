@@ -37,6 +37,14 @@ export default {
       this.cSells = shopInfo.cSells;
       this.cGoods = shopInfo.cGoods;
     }
+  },
+  // 商品参数
+  GoodsParams: class {
+    constructor(info, rule) {
+      this.image = this.images ? this.images[0] : '';
+      this.infos = info.set;
+      this.sizes = rule.tables;
+    }
   }
 
 }
