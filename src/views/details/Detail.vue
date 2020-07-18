@@ -11,6 +11,7 @@
       <detail-info :goods-info="detailInfo" @imgLoad="imgLoad" />
       <detail-goods-params :goods-params="goodsParams" />
       <detail-user-rate :user-rate="userRate" />
+      <goods-list :goods="recommends" />
     </scroll>
   </div>
 </template>
@@ -18,6 +19,7 @@
 <script>
   // 公共组件
   import Scroll from 'components/common/scroll/Scroll';
+  import GoodsList from 'components/conent/goodslist/GoodsLst';
 
   // 页面子组件
   import DetailNavBar from './childComs/DetailNavBar';
@@ -49,7 +51,9 @@
         // 商品参数数据
         goodsParams: {},
         // 用户评论数据
-        userRate: {}
+        userRate: {},
+        // 推荐数据
+        recommends: []
       }
     },
     components: {
@@ -60,7 +64,8 @@
       DetailShopMsg,
       DetailInfo,
       DetailGoodsParams,
-      DetailUserRate
+      DetailUserRate,
+      GoodsList
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -68,10 +73,11 @@
       // console.log(this.iid)
       // 调用toGoodsDetail方法发送网络请求
       this.toGoodsDetail(this.iid);
+      this.getRecommends();
     },
     methods: {
       /*
-       * 网络请求详情页数据
+       * 网络请求数据
        */
       toGoodsDetail(id) {
         sDetail.toGoodsDetail(id).then(res => {
@@ -113,11 +119,18 @@
           console.log(err);
         })
       },
+      // 获取推荐数据
+      getRecommends() {
+        sDetail.getRecommends().then(res => {
+          // console.log(res);
+          this.recommends = res.data.list;
+          console.log(this.recommends);
+        })
+      },
 
       /*
        * 事件处理
        */ 
-
       imgLoad() {
         this.$refs.scroll.refresh();
       }

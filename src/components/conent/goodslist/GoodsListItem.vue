@@ -3,8 +3,6 @@
     <a href="#" class="goods-list-link">
       <img :src="showImage" 
           alt="" 
-          :width="showWH.w" 
-          :height="showWH.h"
           class="goods-list-img"
           @load="itemImgLoad">
       <div class="goods-list-text">
@@ -39,12 +37,6 @@
     computed: {
       showImage() {
         return this.goodsItem.image || this.goodsItem.show.img;
-      },
-      showWH() {
-        return {
-          h: this.goodsItem.show.h,
-          w: this.goodsItem.show.w
-        }
       }
     },
     methods: {

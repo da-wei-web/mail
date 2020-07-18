@@ -10,6 +10,12 @@ export default {
       } 
     })
   },
+
+  getRecommends: () => {
+    return request({
+      url: '/recommend'
+    })
+  },
   /**
    * 数据整合 
    */ 
