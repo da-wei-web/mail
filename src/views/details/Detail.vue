@@ -9,7 +9,8 @@
       <detail-goods-msg :goods-msg="goods" />
       <detail-shop-msg :shop-msg="shop"/>
       <detail-info :goods-info="detailInfo" @imgLoad="imgLoad" />
-      <detail-goods-params :goodsParams="goodsParams" />
+      <detail-goods-params :goods-params="goodsParams" />
+      <detail-user-rate :user-rate="userRate" />
     </scroll>
   </div>
 </template>
@@ -25,6 +26,7 @@
   import DetailShopMsg from './childComs/DetailShopMsg';
   import DetailInfo from './childComs/DetailInfo';
   import DetailGoodsParams from './childComs/DetailGoodsParams';
+  import DetailUserRate from './childComs/DetailUserRate';
 
 
   // 网络请求
@@ -45,7 +47,9 @@
         // 商品详细信息数据
         detailInfo: {},
         // 商品参数数据
-        goodsParams: {}
+        goodsParams: {},
+        // 用户评论数据
+        userRate: {}
       }
     },
     components: {
@@ -55,7 +59,8 @@
       DetailGoodsMsg,
       DetailShopMsg,
       DetailInfo,
-      DetailGoodsParams
+      DetailGoodsParams,
+      DetailUserRate
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -100,6 +105,10 @@
           // 获取商品参数
           this.goodsParams = new sDetail.GoodsParams(data.itemParams.info, data.itemParams.rule);
           console.log(this.goodsParams);
+
+          // 获取用户评价
+          this.userRate = data.rate.list[0];
+          console.log(this.userRate);
         }).catch(err => {
           console.log(err);
         })

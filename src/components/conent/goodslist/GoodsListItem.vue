@@ -1,13 +1,12 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="jumpDetail">
     <a href="#" class="goods-list-link">
       <img :src="showImage" 
           alt="" 
           :width="showWH.w" 
           :height="showWH.h"
           class="goods-list-img"
-          @load="itemImgLoad"
-          @click="jumpDetail">
+          @load="itemImgLoad">
       <div class="goods-list-text">
         <p>{{ goodsItem.title }}</p>
         

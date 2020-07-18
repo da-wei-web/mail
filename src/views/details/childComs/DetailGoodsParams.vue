@@ -1,6 +1,8 @@
 <template>
   <div class="goods-params" v-if="Object.keys(goodsParams).length !== 0">
-    <table v-for="(table, index) in goodsParams.sizes" :key="index" class="goods-size">
+    <table v-for="(table, index) in goodsParams.sizes" 
+          :key="index" 
+          class="goods-size">
       <tr v-for="(tr, indey) in table" :key="indey">
         <td v-for="(td, indez) in tr" :key="indez">{{ td }}</td>
       </tr>
@@ -46,7 +48,7 @@
 
         > td {
           border-bottom: 1px solid rgba(100, 100, 100, .1);
-          // text-align: center;
+          vertical-align: middle; // 单元格里内容居中
         }
       }
     }
