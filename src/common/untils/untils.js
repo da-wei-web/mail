@@ -1,3 +1,25 @@
+
+// mixin
+export const listenImgLoadMixin = {
+  data() {
+    return {
+      listenImgLoad: null
+    }
+  },
+  mounted() {
+    // 防抖减少刷新频率
+    const refresh = debance(this.$refs.scroll.refresh, 300);
+
+    // 监听图片是否加载完成
+    this.listenImgLoad = () => {
+      refresh();
+      // console.log('________')
+    }
+    this.$bus.$on('detailItemImgLoad', this.listenImgLoad);
+    console.log("我是混入")
+  }
+}
+
 // 防抖
 export function debance(fun, delay) {
   let timer = null;

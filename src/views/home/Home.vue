@@ -43,7 +43,7 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 
 // 路由方法
 import sHome from 'network/home';
-import { debance } from 'common/untils/untils';
+import { debance, listenImgLoadMixin } from 'common/untils/untils';
 
 export default {
   name: 'Home',
@@ -85,13 +85,10 @@ export default {
     this.getHomeGoods('new');
     this.getHomeGoods('sell');    
   },
+  // 混入
+  mixins: [listenImgLoadMixin],
   mounted() {
-    // 防抖减少刷新频率
-    const refresh = debance(this.$refs.scroll.refresh, 300);
-    // 监听图片是否加载完成 
-    this.$bus.$on('itemImgLoad', () => {
-      refresh();
-    });
+    this.handleSwitch(0)
   },
   // 进入时
   activated() {
@@ -103,6 +100,7 @@ export default {
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY();
     // console.log('deactivated')
+    this.$bus.$off(this.listenImgLoad);
   },
   methods: {
     /*
@@ -125,8 +123,8 @@ export default {
       // 保持两个tarbar选项的标识是一致的 
       this.$refs.tarControl1.currentIndex = index;
       this.$refs.tarControl2.currentIndex = index;
-      // this.$refs.scroll.refresh();
     }, 
+
     // 返回顶部
     backToTop() {
       // console.log(this.$refs.scroll)

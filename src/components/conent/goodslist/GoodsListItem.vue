@@ -40,8 +40,21 @@
       }
     },
     methods: {
+      // 两个页面级组件会同时监听该属性
       itemImgLoad() {
-        this.$bus.$emit('itemImgLoad');
+        /*
+         * 1. 监听不同路由实现
+         */ 
+        // if(this.$route.path.indexOf('/home')) {
+        //   this.$bus.$emit('itemImgLoad');
+        // }else if(this.$route.path.indexOf('/detail')) {
+        //   this.$bus.$emit('detailItemImgLoad');
+        // }
+
+        /*
+         * 2. mixin混入,解决组件中重复代码
+         */  
+        this.$bus.$emit('itemImageLoad');
       },
       jumpDetail() {
         this.$router.push('/detail/' + this.goodsItem.iid);

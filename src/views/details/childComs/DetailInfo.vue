@@ -33,8 +33,10 @@
     },
     methods: {
       imgLoad() {
-        if(++this.counter === this.imgLength)
-        this.$emit('goodsImgLoad');
+        if(++this.counter === this.imgLength){
+          this.$emit('goodsImgLoad');
+          // console.log('--11--')
+        }
       }
     },
     watch: {

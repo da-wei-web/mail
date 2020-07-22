@@ -32,6 +32,7 @@
       // 菜单切换
       handleClick(index) {
         this.currentIndex = index;
+        this.$emit('listenItemIndex', index);
       },
 
       // 返回

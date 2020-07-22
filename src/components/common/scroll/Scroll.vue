@@ -59,7 +59,7 @@
       },
       // 刷新
       refresh() {
-        // console.log('111111')
+        // console.log('--------')
         this.scroll && this.scroll.refresh();
       },
       // 记录滚动停留的位置
