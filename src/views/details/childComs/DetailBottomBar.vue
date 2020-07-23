@@ -51,12 +51,12 @@
       } 
 
       > .bar-left {
-        padding: 0 .1rem;
+        padding: .07rem .1rem 0;
         > li {
           > i {
             display: block; 
-            width: .27rem;
-            height: .27rem;
+            width: .25rem;
+            height: .25rem;
             margin: auto;
           }
 

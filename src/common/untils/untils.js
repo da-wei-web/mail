@@ -1,5 +1,5 @@
 
-// mixin
+// listenImgLoadMixin
 export const listenImgLoadMixin = {
   data() {
     return {

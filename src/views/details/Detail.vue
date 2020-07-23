@@ -1,6 +1,5 @@
 <template>
   <div id="detail">
-    <!-- <h2>{{ iid }}</h2> -->
     <!-- 头部导航 -->
     <detail-nav-bar @listenItemIndex="getItemIndex" ref="nav" />
     <!-- 主体滚动区域 -->
@@ -16,6 +15,9 @@
       <detail-user-rate ref="rate" :user-rate="userRate" />
       <goods-list ref="recommend" :goods="recommends" />
     </scroll>
+    <!-- 一键置顶 -->
+    <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
+    <!-- 底部购物工具栏 -->
     <detail-bottom-bar />
   </div>
 </template>
@@ -24,6 +26,7 @@
   // 公共组件
   import Scroll from 'components/common/scroll/Scroll';
   import GoodsList from 'components/conent/goodslist/GoodsLst';
+  import BackTop from 'components/conent/backtop/BackTop'; // 返回顶部组件
 
   // 页面子组件
   import DetailNavBar from './childComs/DetailNavBar';
@@ -67,7 +70,9 @@
         // 获取指定组件内容的offsetTop值
         getOffsetTopY: null,
         // detailnavbar的标识
-        currentIndex: 0
+        currentIndex: 0,
+        // 一键置顶的图标
+        isShowBT: false
       }
     },
     components: {
@@ -80,7 +85,8 @@
       DetailGoodsParams,
       DetailUserRate,
       GoodsList,
-      DetailBottomBar
+      DetailBottomBar,
+      BackTop
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -207,8 +213,17 @@
             console.log(index)
             this.$refs.nav.currentIndex = this.currentIndex;
           }
-        })
-      }
+        });
+
+        // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
+        this.isShowBT = Math.abs( position.y ) > 1000;
+      },
+
+      // 返回顶部
+      backToTop() {
+        // console.log(this.$refs.scroll)
+        this.$refs.scroll.scrollTo(0, 0, 500);
+      },
     }
   }
 </script>
