@@ -16,6 +16,7 @@
       <detail-user-rate ref="rate" :user-rate="userRate" />
       <goods-list ref="recommend" :goods="recommends" />
     </scroll>
+    <detail-bottom-bar />
   </div>
 </template>
 
@@ -32,6 +33,7 @@
   import DetailInfo from './childComs/DetailInfo';
   import DetailGoodsParams from './childComs/DetailGoodsParams';
   import DetailUserRate from './childComs/DetailUserRate';
+  import DetailBottomBar from './childComs/DetailBottomBar';
 
 
   // 网络请求
@@ -77,7 +79,8 @@
       DetailInfo,
       DetailGoodsParams,
       DetailUserRate,
-      GoodsList
+      GoodsList,
+      DetailBottomBar
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -220,15 +223,17 @@
 
     > .wrapper-container {
       // calc() CSS3中动态计算元素宽度和高度
-      // height: calc(100% - .44rem);
-
+      height: calc(100% - 0.44rem - 0.49rem);
       overflow: hidden;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: .44rem;
-      bottom: .49rem;
       background-color: #fff;
+
+      //
+      // position: absolute;
+      // top: .44rem;
+      // left: 0;
+      // right: 0;
+      // // bottom: .49rem;
+      
     }
   }
 </style>
