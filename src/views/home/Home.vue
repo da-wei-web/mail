@@ -34,7 +34,6 @@ import NavBar from 'components/common/navbar/NavBar'; // 顶部导航组件
 import Scroll from 'components/common/scroll/Scroll'; // 滚动组件
 import TarControl from 'components/conent/tarcontrol/TarControl'; // 选项卡切换组件
 import GoodsList from 'components/conent/goodslist/GoodsLst'; // 商品列表组件
-import BackTop from 'components/conent/backtop/BackTop'; // 返回顶部组件
 
 // 页面子组件
 import HomeSwiper from './childComs/HomeSwiper.vue'; // 轮播图组件
@@ -43,7 +42,7 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 
 // 路由方法
 import sHome from 'network/home';
-import { debance, listenImgLoadMixin } from 'common/untils/untils';
+import { debance, listenImgLoadMixin, backTopMixin } from 'common/untils/untils';
 
 export default {
   name: 'Home',
@@ -54,8 +53,7 @@ export default {
     HomeRecommendView,
     HomeFeature,
     TarControl,
-    GoodsList,
-    BackTop
+    GoodsList
   },
   data(){
     return {
@@ -69,7 +67,6 @@ export default {
         'sell': { page: 0, list: [] },
       },
       currentType: 'pop',
-      isShowBT: false,
       fixedPosition: 0,
       isFixed: false,
       saveY: 0
@@ -86,7 +83,7 @@ export default {
     this.getHomeGoods('sell');    
   },
   // 混入
-  mixins: [listenImgLoadMixin],
+  mixins: [listenImgLoadMixin, backTopMixin],
   mounted() {
     this.handleSwitch(0)
   },
@@ -125,15 +122,10 @@ export default {
       this.$refs.tarControl2.currentIndex = index;
     }, 
 
-    // 返回顶部
-    backToTop() {
-      // console.log(this.$refs.scroll)
-      this.$refs.scroll.scrollTo(0, 0, 500)
-    },
     // 实时检测滚动位置
     scrollPosition(position) {
       // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
-      this.isShowBT = Math.abs( position.y ) > 1000;
+      this.showBackTop(position);
 
       // 吸停效果
       this.isFixed = Math.abs( position.y ) > this.fixedPosition; 

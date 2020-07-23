@@ -1,3 +1,28 @@
+import BackTop from 'components/conent/backtop/BackTop';
+
+// backTopMixin
+export const backTopMixin = {
+  components: {
+    BackTop
+  },
+  data() {
+    return {
+      isShowBT: false
+    }
+  },
+  methods: {
+    // 返回顶部
+    backToTop() {
+      // console.log(this.$refs.scroll)
+      this.$refs.scroll.scrollTo(0, 0, 500);
+    },
+
+    // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
+    showBackTop(position) {
+      this.isShowBT = Math.abs( position.y ) > 1000;
+    }
+  }
+}
 
 // listenImgLoadMixin
 export const listenImgLoadMixin = {

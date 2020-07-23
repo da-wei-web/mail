@@ -26,7 +26,7 @@
   // 公共组件
   import Scroll from 'components/common/scroll/Scroll';
   import GoodsList from 'components/conent/goodslist/GoodsLst';
-  import BackTop from 'components/conent/backtop/BackTop'; // 返回顶部组件
+  // import BackTop from 'components/conent/backtop/BackTop'; // 返回顶部组件
 
   // 页面子组件
   import DetailNavBar from './childComs/DetailNavBar';
@@ -43,7 +43,7 @@
   import sDetail from 'network/details';
 
   // 工具模块
-  import { listenImgLoadMixin, debance } from 'common/untils/untils';
+  import { listenImgLoadMixin, debance, backTopMixin } from 'common/untils/untils';
 
   export default {
     name: 'Detail',
@@ -72,7 +72,7 @@
         // detailnavbar的标识
         currentIndex: 0,
         // 一键置顶的图标
-        isShowBT: false
+        // isShowBT: false
       }
     },
     components: {
@@ -85,8 +85,8 @@
       DetailGoodsParams,
       DetailUserRate,
       GoodsList,
-      DetailBottomBar,
-      BackTop
+      DetailBottomBar
+      // BackTop
     },
     created() {
       // 获取该个体的iid, 并保存起来
@@ -105,7 +105,7 @@
         this.offsetTopY.push(Number.MAX_VALUE);
       }, 300)
     },
-    mixins: [listenImgLoadMixin],
+    mixins: [listenImgLoadMixin, backTopMixin],
     mounted() {
     },
     destroyed() {
@@ -215,15 +215,16 @@
           }
         });
 
-        // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
-        this.isShowBT = Math.abs( position.y ) > 1000;
+        // 实时检测滚动的位置, 是否显示一件置顶功能图标
+        // this.isShowBT = Math.abs( position.y ) > 1000;
+        this.showBackTop(position)
       },
 
-      // 返回顶部
-      backToTop() {
-        // console.log(this.$refs.scroll)
-        this.$refs.scroll.scrollTo(0, 0, 500);
-      },
+      // // 返回顶部
+      // backToTop() {
+      //   // console.log(this.$refs.scroll)
+      //   this.$refs.scroll.scrollTo(0, 0, 500);
+      // },
     }
   }
 </script>
