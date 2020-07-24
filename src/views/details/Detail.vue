@@ -2,6 +2,7 @@
   <div id="detail">
     <!-- 头部导航 -->
     <detail-nav-bar @listenItemIndex="getItemIndex" ref="nav" />
+    <div>{{ $store.state.contentCart.length }}</div>
     <!-- 主体滚动区域 -->
     <scroll class="wrapper-container" 
             ref="scroll" 
@@ -18,7 +19,7 @@
     <!-- 一键置顶 -->
     <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
     <!-- 底部购物工具栏 -->
-    <detail-bottom-bar @addCart="getGoodsMsg" />
+    <detail-bottom-bar @addCartGoods="addCartGoods" />
   </div>
 </template>
 
@@ -44,6 +45,7 @@
 
   // 工具模块
   import { listenImgLoadMixin, debance, backTopMixin } from 'common/untils/untils';
+ 
 
   export default {
     name: 'Detail',
@@ -227,12 +229,17 @@
       // },
 
       // 监听点击购物车事件并获取相应的商品信息
-      getGoodsMsg() {
+      addCartGoods() {
         let product = {};
         product.image = this.topImages[0];
         product.desc = this.goods.desc;
         product.title = this.goods.title;
+        product.price = this.goods.lowNowPrice;
         product.iid = this.iid;
+        
+        // 向store传入数据
+        this.$store.commit('addCart', product);
+        
       }
     }
   }

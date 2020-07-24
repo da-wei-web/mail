@@ -27,7 +27,7 @@ export default {
       this.discountDesc = itemInfo.discountDesc;
       this.discountBgColor = itemInfo.discountBgColor;
       this.price = itemInfo.price;
-      this.oldPrice = itemInfo.oldPrice;
+      this.lowNowPrice = itemInfo.lowNowPrice;
       this.columns = columns;
       this.services = services;
     }
