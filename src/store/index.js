@@ -39,5 +39,10 @@ export default new Vuex.Store({
   },
   // 分仓库
   modules: {
+  },
+  getters: {
+    contentCartLength(state) {
+      return state.contentCart.length;
+    }
   }
 })
