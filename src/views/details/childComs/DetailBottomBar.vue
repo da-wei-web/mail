@@ -16,7 +16,7 @@
         </li>
       </ul>
       <div class="bar-right bar-item">
-        <div class="cart"><span>加入购物车</span></div>
+        <div class="cart" @click="addCart"><span>加入购物车</span></div>
         <div class="buy"><span>购买</span></div>
       </div>
     </div>
@@ -25,17 +25,24 @@
 
 <script>
   export default {
-    name: 'DetailBottomBar'
+    name: 'DetailBottomBar',
+    methods: {
+      addCart() {
+        this.$emit('addCartGoods');
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
   @import "assets/css/base.less";
   .bottom-bar {
-    position: relative;
+    position: fixed;
     bottom: 0;
+    width: 100%;
     height: .49rem;
     background-color:#fff;
+    z-index: 10;
 
     > .bar-container {
       display: flex;

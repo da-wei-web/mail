@@ -18,7 +18,7 @@
     <!-- 一键置顶 -->
     <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
     <!-- 底部购物工具栏 -->
-    <detail-bottom-bar />
+    <detail-bottom-bar @addCart="getGoodsMsg" />
   </div>
 </template>
 
@@ -181,8 +181,8 @@
 
       // 滚动位置
       scrollPosition(position) {
-        // console.log(this.offsetTopY); // [0, 5845, 6628, 6875, __ob__: Observer]
-        let positionY = -position.y;
+        console.log(this.offsetTopY); // [0, 5845, 6628, 6875, __ob__: Observer]
+        let positionY = -position.y; 
         
         this.offsetTopY.forEach((item, index, array) => {
           /** 区间内
@@ -193,13 +193,13 @@
             * 区间外
             * 6875<positionY ->3
             */ 
-          // console.log(typeof item);
-          // if(this.currentIndex !== index && ((index < array.length - 1 && positionY >= array[index] && positionY < array[index + 1]) || (index === array.length -1 && positionY >= array[index]))) {
-          //   // console.log(index);
-          //   this.currentIndex = index;
-          //   // console.log(this.currentIndex)
-          //   this.$refs.nav.currentIndex = this.currentIndex;
-          // }
+          console.log(typeof item);
+          if(this.currentIndex !== index && ((index < array.length - 1 && positionY >= array[index] && positionY < array[index + 1]) || (index === array.length -1 && positionY >= array[index]))) {
+            // console.log(index);
+            this.currentIndex = index;
+            // console.log(this.currentIndex)
+            this.$refs.nav.currentIndex = this.currentIndex;
+          }
 
           // 技巧 原理在数组中最后面添加一项, 
           /** 区间内
@@ -208,11 +208,11 @@
             * 6628<positionY<6875 ->2
             * 6875<positionY<最大数 ->3
             */ 
-          if(this.currentIndex !== index && ( positionY >= array[index] && positionY < array[index + 1] )) {
-            this.currentIndex = index;
-            console.log(index)
-            this.$refs.nav.currentIndex = this.currentIndex;
-          }
+          // if(this.currentIndex !== index && ( positionY >= array[index] && positionY < array[index + 1] )) {
+          //   this.currentIndex = index;
+          //   console.log(index)
+          //   this.$refs.nav.currentIndex = this.currentIndex;
+          // }
         });
 
         // 实时检测滚动的位置, 是否显示一件置顶功能图标
@@ -225,6 +225,15 @@
       //   // console.log(this.$refs.scroll)
       //   this.$refs.scroll.scrollTo(0, 0, 500);
       // },
+
+      // 监听点击购物车事件并获取相应的商品信息
+      getGoodsMsg() {
+        let product = {};
+        product.image = this.topImages[0];
+        product.desc = this.goods.desc;
+        product.title = this.goods.title;
+        product.iid = this.iid;
+      }
     }
   }
 </script>
@@ -238,18 +247,18 @@
     background-color: #fff;
 
     > .wrapper-container {
-      // calc() CSS3中动态计算元素宽度和高度
-      height: calc(100% - 0.44rem - 0.49rem);
-      overflow: hidden;
-      background-color: #fff;
-
-      //
-      // position: absolute;
-      // top: .44rem;
-      // left: 0;
-      // right: 0;
-      // // bottom: .49rem;
+      // 方法1 calc() CSS3中动态计算元素宽度和高度 有误差
+      // height: calc(100% - 0.44rem - 0.49rem);
+      // overflow: hidden;
       
+      // 方法2
+      overflow: hidden;
+      position: absolute;
+      top: .44rem;
+      left: 0;
+      right: 0;
+      bottom: .49rem;
+      background-color: #fff;
     }
   }
 </style>
