@@ -29,6 +29,7 @@ export default new Vuex.Store({
       if(oldProduct) {
         oldProduct.count += 1;
       }else {
+        payload.checked = true;
         payload.count = 1;
         state.contentCart.push(payload);
       }
@@ -43,6 +44,9 @@ export default new Vuex.Store({
   getters: {
     contentCartLength(state) {
       return state.contentCart.length;
+    },
+    cartList(state) {
+      return state.contentCart;
     }
   }
 })
