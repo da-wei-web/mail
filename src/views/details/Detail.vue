@@ -183,7 +183,7 @@
 
       // 滚动位置
       scrollPosition(position) {
-        console.log(this.offsetTopY); // [0, 5845, 6628, 6875, __ob__: Observer]
+        // console.log(this.offsetTopY); // [0, 5845, 6628, 6875, __ob__: Observer]
         let positionY = -position.y; 
         
         this.offsetTopY.forEach((item, index, array) => {
@@ -195,7 +195,7 @@
             * 区间外
             * 6875<positionY ->3
             */ 
-          console.log(typeof item);
+          // console.log(typeof item);
           if(this.currentIndex !== index && ((index < array.length - 1 && positionY >= array[index] && positionY < array[index + 1]) || (index === array.length -1 && positionY >= array[index]))) {
             // console.log(index);
             this.currentIndex = index;
@@ -238,7 +238,7 @@
         product.iid = this.iid;
         
         // 向store传入数据
-        this.$store.commit('addCart', product);
+        this.$store.dispatch('addCart', product);
         
       }
     }

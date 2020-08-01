@@ -3,50 +3,25 @@ import Vue from 'vue'
 // 引入vuex
 import Vuex from 'vuex'
 
+import { mutations } from './mutations';
+import { getters } from './getters';
+import { actions } from './actions';
+
 // 使用vuex
 Vue.use(Vuex)
+
+const state = {
+  // 记录购物车里展示的数据
+  contentCart: []
+}
 
 // 实例化一个store
 export default new Vuex.Store({
   // 状态
-  state: {
-    // 记录购物车里展示的数据
-    contentCart: [],
-    
-  },
+  state,
   // 改变状态
-  mutations: {
-    addCart(state, payload) {
-      // 方法 1:
-      // let oldProduct = null;
-      // for(let item of state.contentCart) {
-      //   if(item.iid === payload.iid) oldProduct = item;
-      // }
-
-      // 方法2:
-      let oldProduct = state.contentCart.find(item => item.iid === payload.iid);
-
-      if(oldProduct) {
-        oldProduct.count += 1;
-      }else {
-        payload.checked = true;
-        payload.count = 1;
-        state.contentCart.push(payload);
-      }
-    }
-  },
+  mutations,
   // 异步操作
-  actions: {
-  },
-  // 分仓库
-  modules: {
-  },
-  getters: {
-    contentCartLength(state) {
-      return state.contentCart.length;
-    },
-    cartList(state) {
-      return state.contentCart;
-    }
-  }
+  actions,
+  getters
 })

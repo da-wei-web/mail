@@ -3,8 +3,8 @@
     <!-- 全选按钮 -->
     <div class="all-select">
       <select-button @click.native="selectItem" 
-                      :class="{'btn-color': isChecked}" 
-                      :is-checked="isChecked">
+                      :class="{'btn-color': isSelectAll}" 
+                      :is-checked="isSelectAll">
       </select-button>
       <span class="all-btn">全选</span>
     </div>
@@ -25,12 +25,12 @@
   import { mapGetters } from 'vuex'
   export default {
     name: 'SettleAccounts',
-    data() {
-      return {
-        // 保存选择状态
-        isChecked: false
-      }
-    },
+    // data() {
+    //   return {
+    //     // 保存选择状态
+    //     isChecked: false
+    //   }
+    // },
     components: {
       SelectButton
     },
@@ -49,17 +49,28 @@
       checkedLength() {
         return this.cartList.filter(item => item.checked).length;
       },
-      // 被选中的状态
-      checked() {
-        return this.cartList.filter(item => item.checked).forEach(item => { 
-          this.isChecked = item.checked;
-        });
+      isSelectAll() {
+        if(this.cartList.length === 0) return false;
+        // 1.遍历
+        for(let item of this.cartList) {
+          if(!item.checked) {
+            return false
+          } 
+        }
+        return true;
+
+        // 2. find
+        // return !this.cartList.find(item => !item.checked);
       }
     },
     methods: {
       // 切换选择状态
       selectItem() {
-        this.isChecked = !this.isChecked;
+        if(this.isSelectAll) {
+          this.cartList.forEach(item => item.checked = false);
+        }else{
+          this.cartList.forEach(item => item.checked = true);
+        }
       }
     }
   }

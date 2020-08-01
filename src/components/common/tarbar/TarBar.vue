@@ -17,7 +17,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: .48rem;
+    height: .49rem;
     background-color:orange;
     z-index: 9;
   }
