@@ -5,6 +5,7 @@ import store from './store'
 import FastClick from 'fastclick';
 
 import toast from 'components/common/toast';
+import vueLazyLoad from 'vue-lazyload';
 
 Vue.config.productionTip = false;
 
@@ -16,6 +17,7 @@ FastClick.attach(document.body);
 
 // 安装插件
 Vue.use(toast);
+Vue.use(vueLazyLoad);
 
 new Vue({
   router,

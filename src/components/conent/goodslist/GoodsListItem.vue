@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item" @click="jumpDetail">
     <a href="#" class="goods-list-link">
-      <img :src="showImage" 
+      <img v-lazy="showImage" 
           alt="" 
           class="goods-list-img"
           @load="itemImgLoad">
