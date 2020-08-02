@@ -45,7 +45,7 @@
 
   // 工具模块
   import { listenImgLoadMixin, debance, backTopMixin } from 'common/untils/untils';
- 
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'Detail',
@@ -171,6 +171,8 @@
       /*
        * 事件处理
        */ 
+      ...mapActions(['addCart']),
+      // 监听图片是否加载完成 
       imgLoad() {
         this.$refs.scroll.refresh();
         this.getOffsetTopY();
@@ -237,8 +239,15 @@
         product.price = this.goods.lowNowPrice;
         product.iid = this.iid;
         
-        // 向store传入数据
-        this.$store.dispatch('addCart', product);
+        // 向store传入数据 actions可以返回一个Promise对象
+        // this.$store.dispatch('addCart', product).then(res => {
+        //   console.log(res)
+        // });
+
+        this.addCart(product).then(res => {
+          // console.log(res);
+          this.$toast.show();
+        })
         
       }
     }

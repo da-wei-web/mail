@@ -13,7 +13,7 @@
       <span>合计：{{ totalPrice }}</span>
     </div>
     <!-- 结算 -->
-    <div class="settlement">
+    <div class="settlement" @click="calcSelect">
       <span>去结算({{ checkedLength }})</span>
     </div>
   </div>
@@ -70,6 +70,13 @@
           this.cartList.forEach(item => item.checked = false);
         }else{
           this.cartList.forEach(item => item.checked = true);
+        }
+      },
+
+      //  结算 
+      calcSelect() {
+        if(this.checkedLength === 0) {
+          this.$toast.show('没有选择任何商品', 1000)
         }
       }
     }
