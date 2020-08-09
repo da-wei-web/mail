@@ -56,4 +56,12 @@ const router = new VueRouter({
   routes
 })
 
+// vue3.0 可能增加的特性
+// import { createRouter, createWebHashHistory } from 'vue-router'
+// const router = createRouter({
+//   history: createWebHashHistory(),
+//   routes
+// })
+
+
 export default router

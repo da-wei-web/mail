@@ -2,7 +2,6 @@
   <div id="detail">
     <!-- 头部导航 -->
     <detail-nav-bar @listenItemIndex="getItemIndex" ref="nav" />
-    <div>{{ $store.state.contentCart.length }}</div>
     <!-- 主体滚动区域 -->
     <scroll class="wrapper-container" 
             ref="scroll" 
@@ -44,7 +43,8 @@
   import sDetail from 'network/details';
 
   // 工具模块
-  import { listenImgLoadMixin, debance, backTopMixin } from 'common/untils/untils';
+  import { debance } from 'common/untils/untils';
+import { listenImgLoadMixin, backTopMixin } from 'common/untils/mixins';
   import { mapActions } from 'vuex';
 
   export default {
