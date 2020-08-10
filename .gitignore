@@ -2,10 +2,11 @@
 node_modules
 /dist
 .editorconfig
-.gitignore
+public/response.html
+public/response2.html
 
 # axios
-./src/network/request.js
+src/network/request.js
 
 # local env files
 .env.local
