@@ -1,10 +1,8 @@
 <template>
-  <div class="goods-list-item">
+  <div class="goods-list-item" @click="jumpDetail">
     <a href="#" class="goods-list-link">
-      <img :src="showImage" 
+      <img v-lazy="showImage" 
           alt="" 
-          :width="showWH.w" 
-          :height="showWH.h"
           class="goods-list-img"
           @load="itemImgLoad">
       <div class="goods-list-text">
@@ -31,24 +29,35 @@
       goodsItem: {
         type: Object,
         default(){
-          return {}
+          return {
+          }
         }
       }
     },
     computed: {
       showImage() {
-        return this.goodsItem.image || this.goodsItem.show.img;
-      },
-      showWH() {
-        return {
-          h: this.goodsItem.show.h,
-          w: this.goodsItem.show.w
-        }
+        return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img;
       }
     },
     methods: {
+      // 两个页面级组件会同时监听该属性
       itemImgLoad() {
-        this.$bus.$emit('itemImgLoad');
+        /*
+         * 1. 监听不同路由实现
+         */ 
+        // if(this.$route.path.indexOf('/home')) {
+        //   this.$bus.$emit('itemImgLoad');
+        // }else if(this.$route.path.indexOf('/detail')) {
+        //   this.$bus.$emit('detailItemImgLoad');
+        // }
+
+        /*
+         * 2. mixin混入,解决组件中重复代码
+         */  
+        this.$bus.$emit('itemImageLoad');
+      },
+      jumpDetail() {
+        this.$router.push('/detail/' + this.goodsItem.iid);
       }
     }
   }

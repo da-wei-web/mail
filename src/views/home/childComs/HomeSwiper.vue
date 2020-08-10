@@ -1,6 +1,6 @@
 <template>
   <swiper>
-		<slide v-for="(item, index) in banners" :key="index" class="slide">
+		<slide v-for="(item, index) in banners" :key="index" class="slide-base">
 			<a :href="item.link">
 				<img :src="item.image" alt="" @load="imageLoad">
 			</a>
@@ -49,7 +49,7 @@
 </script>
 
 <style lang="less" scoped>
-  .slide {
+  .slide-base {
     // 解决div的高度大于img高度的问题
     font-size: 0;
 

@@ -1,6 +1,6 @@
 <template>
   <div id="swiper-container">
-    <div class="swiper">
+    <div class="swiper" @touchStart="touchStart" @touchMove="touchMove">
       <slot></slot>
     </div>
     <slot name="pagination"></slot>

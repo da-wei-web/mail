@@ -1,32 +1,32 @@
 <template>
   <tar-bar>
-    <tar-bar-item path="/home" activeColor="green">
+    <tar-bar-item path="/home">
       <template v-slot:slot-icon>
-        <span class="iconfont icon-wodezhiwei"></span>
+        <span class="iconfont icon-zhuye"></span>
       </template>
       <template v-slot:slot-text>
         <span class="text">主页</span>
       </template>
     </tar-bar-item>
-    <tar-bar-item path="/company">
+    <tar-bar-item path="/category">
       <template v-slot:slot-icon>
-        <span class="iconfont icon-gongsimingcheng"></span>
+        <span class="iconfont icon-fenlei-active"></span>
       </template>
       <template v-slot:slot-text>
-        <span class="text">公司</span>
+        <span class="text">分类</span>
       </template>
     </tar-bar-item>
-    <tar-bar-item path="/news">
+    <tar-bar-item path="/cart">
       <template v-slot:slot-icon>
-        <span class="iconfont icon-xiaoxi"></span>
+        <span class="iconfont icon-gouwuche"></span>
       </template>
       <template v-slot:slot-text>
-        <span class="text">消息</span>
+        <span class="text">购物车</span>
       </template>
     </tar-bar-item>
     <tar-bar-item path="/my">
       <template  v-slot:slot-icon>
-        <span class="iconfont icon-wode"></span>
+        <span class="iconfont icon-Icon_wode"></span>
       </template>
       <template  v-slot:slot-text>
         <span class="text">我的</span>

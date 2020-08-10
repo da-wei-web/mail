@@ -2,9 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 const Home = () => import('views/home/Home.vue');
-const Company = () => import('views/company/Company.vue');
+const Category = () => import('views/category/Category.vue');
 const My = () => import('views/my/My.vue');
-const News = () => import('views/news/News.vue');
+const Cart = () => import('views/cart/Cart.vue');
+const Detail = () => import('views/details/Detail.vue');
 
 // 解决重复点击路由报错问题
 const originPush = VueRouter.prototype.push;
@@ -28,19 +29,24 @@ const routes = [
     component: Home
   },
   {
-    path: '/company',
-    name: 'Company',
-    component: Company
+    path: '/category',
+    name: 'Category',
+    component: Category
   },
   {
-    path: '/news',
-    name: 'News',
-    component: News
+    path: '/cart',
+    name: 'Cart',
+    component: Cart
   },
   {
     path: '/my',
     name: 'My',
     component: My
+  },
+  {
+    path: '/detail/:iid',
+    name: 'Detail',
+    component: Detail
   }
 ]
 
@@ -49,5 +55,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// vue3.0 可能增加的特性
+// import { createRouter, createWebHashHistory } from 'vue-router'
+// const router = createRouter({
+//   history: createWebHashHistory(),
+//   routes
+// })
+
 
 export default router

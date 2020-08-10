@@ -26,12 +26,19 @@
     text-align: center;
     box-shadow: 0 1px 1px 0 rgba(100, 100, 100, .1);
 
-    > .left, .right{
+    > .left, .right {
       width: .6rem;
       // background-color: red;
-    }
+      line-height: .44rem;
+      text-align: center;
 
-    > .center{
+      > span {
+        display: inherit;
+      }
+    }
+    
+
+    > .center {
       flex: 1;
       // background-color: green;
     }

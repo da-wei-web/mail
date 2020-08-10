@@ -6,25 +6,25 @@
       </template>
     </nav-bar>
     <tar-control :tarList="['流行', '新款', '精选']" 
-              @handleSwitch="handleSwitch"
-              ref="tarControl1"
-              class="tar-control-top" 
-              v-show="isFixed" />
+                 @handleSwitch="handleSwitch"
+                 ref="tarControl1"
+                 class="tar-control-top" 
+                 v-show="isFixed" />
     <scroll class="wrapper-container" 
             ref="scroll"
             :probe-type="3"
             @scroll="scrollPosition"
             :pull-up-load="true"
             @pullingUp="loadMore">
-      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"></home-swiper>
-      <home-recommend-view :recommends="recommends"></home-recommend-view>
-      <home-feature :features="recommends"></home-feature>
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
+      <home-recommend-view :recommends="recommends" />
+      <home-feature :features="recommends" />
       <tar-control :tarList="['流行', '新款', '精选']" 
                     @handleSwitch="handleSwitch"
                     ref="tarControl2" />
-      <goods-list :goods="goods[currentType].list" ></goods-list>
+      <goods-list :goods="goods[currentType].list" />
     </scroll>
-    <back-top @click.native="backToTop" v-show="isShowBT"></back-top>
+    <back-top @click.native="backToTop" v-show="isShowBT" />
   </div>
 </template>
 
@@ -32,9 +32,7 @@
 // 公共组件
 import NavBar from 'components/common/navbar/NavBar'; // 顶部导航组件
 import Scroll from 'components/common/scroll/Scroll'; // 滚动组件
-import TarControl from 'components/conent/tarcontrol/TarControl'; // 选项卡切换组件
 import GoodsList from 'components/conent/goodslist/GoodsLst'; // 商品列表组件
-import BackTop from 'components/conent/backtop/BackTop'; // 返回顶部组件
 
 // 页面子组件
 import HomeSwiper from './childComs/HomeSwiper.vue'; // 轮播图组件
@@ -44,8 +42,9 @@ import HomeFeature from './childComs/HomeFeature.vue'; // 特点信息组件
 // 路由方法
 import sHome from 'network/home';
 import { debance } from 'common/untils/untils';
+import { listenImgLoadMixin, backTopMixin, tarControlMixin } from 'common/untils/mixins';
+import { POP, NEW, SELL } from 'common/untils/constant';
 
-console.log(sHome)
 export default {
   name: 'Home',
   components: {
@@ -54,9 +53,7 @@ export default {
     HomeSwiper,
     HomeRecommendView,
     HomeFeature,
-    TarControl,
-    GoodsList,
-    BackTop
+    GoodsList
   },
   data(){
     return {
@@ -69,8 +66,6 @@ export default {
         'new': { page: 0, list: [] },
         'sell': { page: 0, list: [] },
       },
-      currentType: 'pop',
-      isShowBT: false,
       fixedPosition: 0,
       isFixed: false,
       saveY: 0
@@ -82,17 +77,14 @@ export default {
     this.getHomeMultidata();
 
     // 商品列表信息
-    this.getHomeGoods('pop');
-    this.getHomeGoods('new');
-    this.getHomeGoods('sell');    
+    this.getHomeGoods(POP);
+    this.getHomeGoods(NEW);
+    this.getHomeGoods(SELL);    
   },
+  // 混入
+  mixins: [listenImgLoadMixin, backTopMixin, tarControlMixin],
   mounted() {
-    // 防抖减少刷新频率
-    const refresh = debance(this.$refs.scroll.refresh, 300);
-    // 监听图片是否加载完成 
-    this.$bus.$on('itemImgLoad', () => {
-      refresh();
-    });
+    this.handleSwitch(0)
   },
   // 进入时
   activated() {
@@ -104,6 +96,7 @@ export default {
   deactivated() {
     this.saveY = this.$refs.scroll.getScrollY();
     // console.log('deactivated')
+    this.$bus.$off(this.listenImgLoad);
   },
   methods: {
     /*
@@ -113,30 +106,24 @@ export default {
     handleSwitch(index) {
       switch(index) {
         case 0:
-          this.currentType = 'pop';
+          this.currentType = POP;
           break;
         case 1:
-          this.currentType = 'new';
+          this.currentType = NEW;
           break;
         case 2:
-          this.currentType = 'sell';
+          this.currentType = SELL;
           break;
       }
-
       // 保持两个tarbar选项的标识是一致的 
       this.$refs.tarControl1.currentIndex = index;
       this.$refs.tarControl2.currentIndex = index;
-      // this.$refs.scroll.refresh();
     }, 
-    // 返回顶部
-    backToTop() {
-      // console.log(this.$refs.scroll)
-      this.$refs.scroll.scrollTo(0, 0, 500)
-    },
+
     // 实时检测滚动位置
     scrollPosition(position) {
       // 实时检测滚动的位置, 大于1000时显示一件置顶功能图标
-      this.isShowBT = Math.abs( position.y ) > 1000;
+      this.showBackTop(position);
 
       // 吸停效果
       this.isFixed = Math.abs( position.y ) > this.fixedPosition; 
