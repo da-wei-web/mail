@@ -18,7 +18,8 @@
     bottom: 0;
     width: 100%;
     height: .49rem;
-    background-color:orange;
+    background-color:#fff;
+    box-shadow: 0 -0.01rem .01rem 0 rgba(100, 100, 100, .1);
     z-index: 9;
   }
 
