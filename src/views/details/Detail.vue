@@ -44,7 +44,7 @@
 
   // 工具模块
   import { debance } from 'common/untils/untils';
-import { listenImgLoadMixin, backTopMixin } from 'common/untils/mixins';
+  import { listenImgLoadMixin, backTopMixin } from 'common/untils/mixins';
   import { mapActions } from 'vuex';
 
   export default {
